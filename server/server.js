@@ -1,49 +1,28 @@
 const express = require('express'); 
 const app = express();
 const port = 3000; 
-const fs = require('fs');
-const { finished } = require('stream');
 
-// var data = fs.readFileSync('posts.json');
-// var posts = JSON.parse(data);
-// console.log(posts)
+var posts = []
+var post_id = 0;
 
-const data = require('../client/data')
-var posts = JSON.stringify(data)
-app.use(express.static('../client'))
+app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Hello World, this is our propaganda blog website!')
+    res.send(posts)
 });
 
-app.get('/add/:idpost/:text', addPost);
-
-function addPost(request, response) {
-    var data = request.params;
-    var idpost = data.idpost;
-    var text = data.text;
-    var reply;
+app.post('/', function(req, res) {
+    const text = req.body.text;
     if (!text) {
-        reply = {
-            msg: "A blog is required."
-        }
-    } else {
-        posts[idpost] = text;
-        var data = JSON.stringify(posts, null, 2);
-        fs.writeFile('posts.js', data, finished);
-
-        function finished(err) {
-            console.log('All good.');
-            reply = {
-                idpost: idpost,
-                text: text,
-                status: "success"
-            }
-            response.send(reply)
-        }
-        
-        }
+        throw "Empty `text`";
     }
-
+    post_id++;
+    post = {
+        text: text,
+        id: post_id,
+    }
+    posts.push(post);
+    res.send(post);
+});
 
 app.listen(port, console.log(`the sun is listening at http://localhost:${port}`));
