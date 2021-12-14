@@ -5,6 +5,9 @@ const port = 3000;
 var posts = []
 var post_id = 0;
 
+const cors = require('cors');
+app.use(cors());
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
