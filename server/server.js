@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const port = 3000; 
 
-var posts = []
-var post_id = 0;
+const posts = []
+let post_id = 0;
 
 const cors = require('cors');
 app.use(cors());
@@ -20,7 +20,7 @@ app.post('/', function(req, res) {
         throw "Empty `text`";
     }
     post_id++;
-    post = {
+    const post = {
         text: text,
         id: post_id,
     }
