@@ -1,3 +1,15 @@
+const postsContainer = document.getElementById('posts');
+
+function post(url, json) {
+    return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(json),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+}
+
 function renderPost(post) {
     const li = document.createElement('li');
     const text = document.createTextNode(post.text);
@@ -5,12 +17,12 @@ function renderPost(post) {
     return li;
 }
 
-function renderPosts(posts) {
-    container = document.getElementById('posts');
+function appendPost(post) {
+    postsContainer.appendChild(renderPost(post));
+}
 
-    posts.forEach(post => {
-        container.appendChild(renderPost(post));
-    });
+function renderPosts(posts) {
+    posts.forEach(appendPost);
 }
 
 function reloadPosts() {
@@ -19,6 +31,20 @@ function reloadPosts() {
         .then(renderPosts);
 }
 
+function createPost(text) {
+    post('http://localhost:3000/', {text: text})
+        .then(response => response.json())
+        .then(appendPost);
+}
+
 window.addEventListener('load', function() {
     reloadPosts();
+});
+
+document.getElementById('entry-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const textarea = document.getElementById('entry-textbox');
+    const text = textarea.value;
+    textarea.value = '';
+    createPost(text);
 });
