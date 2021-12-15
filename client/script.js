@@ -1,89 +1,133 @@
-const entryTitle = document.getElementById("entry-title");
-const entryTextbox = document.getElementById("entry-textbox");
-const entryForm = document.getElementById("entry-form");
-var list = document.getElementById('entryList');
-
-
-getAllEntries();
-var numEntries = entries.length;
-
-function saveMessage() {
-    localStorage.setItem('entries', JSON.stringify(entries));
-};
-
-
-function addMessage(title, message) {
-    var entry = {
-        id: numEntries,
-        title: title,
-        message: message,
-        comments: []
-    }
-    entries.push(entry);
-    saveMessage();
-    numEntries++
-    console.log(entries);
-    
-
-    var commentCount = (entry.comments != null) ? entry.comments.length : "0";
-        var html = `
-        <li class="row">
-            <a href="/message.html?${entry.id}">
-            <h4 class="title">
-                ${entry.title}
-            <h4>
-            </a>
-            <div class="bottom>
-                <p class="message">
-                    ${entry.message}
-                </p>
-                <p class="comment-count">
-                    ${commentCount} comments
-                </p>
-            </div>
-        </li>
-        `
-        list.insertAdjacentHTML('afterend', html)
-};
-
-function getAllEntries() {
-
-    for (let entry of entries) {
-        var commentCount = (entry.comments != null) ? entry.comments.length : "0";
-        var html = `
-        <li class="row">
-            <a href="message.html?${entry.id}">
-            <h4 class="title">
-                ${entry.title}
-            <h4>
-            </a>
-            <div class="bottom>
-                <p class="message">
-                    ${entry.message}
-                </p>
-                <p class="comment-count">
-                    ${commentCount} comments
-                </p>
-            </div>
-        </li>
-        `
-        list.insertAdjacentHTML('afterend', html)
-    };
-};
-
-function onEntrySubmit(event) {
-    event.preventDefault();
-    console.log(entryTitle.value)
-    console.log(entryTextbox.value)
-    addMessage(entryTitle.value, entryTextbox.value);
-    clearInputFields();
-    console.log(entries);
+const postsContainer = document.getElementById('posts');
+function endpoint(path) {
+    path = path || '';
+    return 'http://localhost:3000/' + path;
 }
 
-function clearInputFields() {
-    entryTitle.value = "";
-    entryTextbox.value = "";
-  }
+function post(url, json) {
+    return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(json),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+}
 
-entryForm.addEventListener("submit", onEntrySubmit);
-  
+function renderPost(post) {
+    const li = document.createElement('li');
+    li.setAttribute('id', 'post-'+post.id);
+    const text = document.createTextNode(post.text);
+    const reactions = document.createElement('div');
+    reactions.classList.add('reactions');
+
+    reactions.appendChild(renderReaction('👍🏻', 0));
+    reactions.appendChild(renderReaction('❤️', 0));
+
+    const replies = document.createElement('ol');
+    li.appendChild(text);
+    li.appendChild(reactions);
+    li.appendChild(replies);
+    const comment_form = document.createElement('form');
+    const comment_line = document.createElement('textarea');
+    comment_line.setAttribute('name', 'text');
+    const post_id = document.createElement('input');
+    post_id.setAttribute('type', 'hidden');
+    post_id.setAttribute('name', 'post_id');
+    post_id.value = post.id;
+    const send_button = document.createElement('input');
+    send_button.setAttribute('type', 'submit');
+    comment_form.appendChild(post_id);
+    comment_form.appendChild(comment_line);
+    comment_form.appendChild(send_button);
+    comment_form.addEventListener('submit', submitComment);
+    li.appendChild(comment_form);
+    return li;
+}
+
+function appendPost(post) {
+    postsContainer.appendChild(renderPost(post));
+}
+
+function submitComment(event) {
+    event.preventDefault();
+    const form = event.target;
+    const post_id = form.querySelector('[name=post_id]').value;
+    const textarea = form.querySelector('textarea');
+    const text = textarea.value;
+    textarea.value = '';
+
+    post(endpoint(post_id+'/reply'), { text: text })
+        .then(response => response.json())
+        .then(appendReply);
+}
+
+function renderReply(reply) {
+    const li = document.createElement('li');
+    const text = document.createTextNode(reply.text);
+    li.appendChild(text);
+    return li;
+}
+
+function appendReply(reply) {
+    const post_id = reply.post_id;
+    const container = document.getElementById('post-'+post_id).getElementsByTagName('ol')[0];
+
+    if (container) {
+        container.appendChild(renderReply(reply));
+    }
+}
+
+function renderReaction(emoji, value) {
+    const li = document.createElement('div');
+    li.appendChild(document.createTextNode(emoji));
+    const v = document.createElement('span');
+    v.appendChild(document.createTextNode(value));
+    li.append(v);
+    return li;
+}
+
+function updateReactions(reactions) {
+    for (post_id in reactions) {
+        const container = document.getElementById('post-'+post_id).getElementsByClassName('reactions')[0];
+        const emojis = reactions[post_id];
+        for (emoji in emojis) {
+            const e = container.querySelector('[data-emoji="'+emoji+'"]');
+            if (!e) {
+                container.appendChild(renderReaction(emoji, emojis[emoji]));
+            } else {
+                e.querySelector('span').innerText = emojis[emoji];
+            }
+        }
+    }
+}
+
+function renderRoot(data) {
+    data.posts.forEach(appendPost);
+    data.replies.forEach(appendReply);
+    updateReactions(data.reactions);
+}
+
+function reloadPosts() {
+    fetch(endpoint())
+        .then(response => response.json())
+        .then(renderRoot);
+}
+
+function createPost(text) {
+    post(endpoint(), {text: text})
+        .then(response => response.json())
+        .then(appendPost);
+}
+
+window.addEventListener('load', function() {
+    reloadPosts();
+});
+
+document.getElementById('entry-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const textarea = document.getElementById('entry-textbox');
+    const text = textarea.value;
+    textarea.value = '';
+    createPost(text);
+});
