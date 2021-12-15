@@ -1,13 +1,32 @@
-.top-bar {
-    background-color: rgb(42, 42, 240);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ul#posts {
+    padding: 0;
 }
 
-.topnav {
-    display: inline;
-    background-color: cornflowerblue;
+ul#posts li {
+    display: block;
+    border: none;
+    border-radius: 12px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, HelveticaNeue, "Helvetica Neue", Helvetica, Roboto, "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 1em;
+    padding: 1em;
 }
 
-a {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ul#posts li .reactions div {
+    display: inline-block;
+
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
+ul#posts li .reactions div span {
+    font-size: 10px;
+    border-radius: 12px;
+    box-shadow: rgb(0 0 0 / 30%) 0px 0px 8px;
+    border: 1px solid black;
+    display: inline-block;
+    padding: 0.1em 0.3em;
+    margin: 0.3em;
 }
