@@ -18,8 +18,15 @@ function renderPost(post) {
     const li = document.createElement('li');
     li.setAttribute('id', 'post-'+post.id);
     const text = document.createTextNode(post.text);
+    const reactions = document.createElement('div');
+    reactions.classList.add('reactions');
+
+    reactions.appendChild(renderReaction('👍🏻', 0));
+    reactions.appendChild(renderReaction('❤️', 0));
+
     const replies = document.createElement('ol');
     li.appendChild(text);
+    li.appendChild(reactions);
     li.appendChild(replies);
     const comment_form = document.createElement('form');
     const comment_line = document.createElement('textarea');
@@ -64,16 +71,41 @@ function renderReply(reply) {
 
 function appendReply(reply) {
     const post_id = reply.post_id;
-    container = document.getElementById('post-'+post_id).getElementsByTagName('ol')[0];
+    const container = document.getElementById('post-'+post_id).getElementsByTagName('ol')[0];
 
     if (container) {
         container.appendChild(renderReply(reply));
     }
 }
 
+function renderReaction(emoji, value) {
+    const li = document.createElement('div');
+    li.appendChild(document.createTextNode(emoji));
+    const v = document.createElement('span');
+    v.appendChild(document.createTextNode(value));
+    li.append(v);
+    return li;
+}
+
+function updateReactions(reactions) {
+    for (post_id in reactions) {
+        const container = document.getElementById('post-'+post_id).getElementsByClassName('reactions')[0];
+        const emojis = reactions[post_id];
+        for (emoji in emojis) {
+            const e = container.querySelector('[data-emoji="'+emoji+'"]');
+            if (!e) {
+                container.appendChild(renderReaction(emoji, emojis[emoji]));
+            } else {
+                e.querySelector('span').innerText = emojis[emoji];
+            }
+        }
+    }
+}
+
 function renderRoot(data) {
     data.posts.forEach(appendPost);
     data.replies.forEach(appendReply);
+    updateReactions(data.reactions);
 }
 
 function reloadPosts() {

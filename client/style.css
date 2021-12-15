@@ -13,3 +13,20 @@ ul#posts li {
     margin: 1em;
     padding: 1em;
 }
+
+ul#posts li .reactions div {
+    display: inline-block;
+
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
+ul#posts li .reactions div span {
+    font-size: 10px;
+    border-radius: 12px;
+    box-shadow: rgb(0 0 0 / 30%) 0px 0px 8px;
+    border: 1px solid black;
+    display: inline-block;
+    padding: 0.1em 0.3em;
+    margin: 0.3em;
+}
