@@ -1,4 +1,8 @@
 const postsContainer = document.getElementById('posts');
+function endpoint(path) {
+    path = path || '';
+    return 'http://localhost:3000/' + path;
+}
 
 function post(url, json) {
     return fetch(url, {
@@ -26,13 +30,13 @@ function renderPosts(posts) {
 }
 
 function reloadPosts() {
-    fetch('http://localhost:3000/')
+    fetch(endpoint())
         .then(response => response.json())
         .then(renderPosts);
 }
 
 function createPost(text) {
-    post('http://localhost:3000/', {text: text})
+    post(endpoint(), {text: text})
         .then(response => response.json())
         .then(appendPost);
 }
