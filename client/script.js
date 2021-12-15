@@ -14,8 +14,6 @@ function post(url, json) {
     });
 };
 
-
-
 function renderPost(post) {
     const li = document.createElement('li');
     li.setAttribute('id', 'post-'+post.id);
@@ -25,7 +23,7 @@ function renderPost(post) {
 
     //Displays emojis
     reactions.appendChild(renderReaction('👍🏻', 0));
-    reactions.appendChild(renderReaction('❤️', 0));
+    reactions.appendChild(renderReaction('😢', 0));
     reactions.appendChild(renderReaction('🔥', 0));
 
     const replies = document.createElement('ol');
@@ -40,18 +38,20 @@ function renderPost(post) {
     post_id.setAttribute('name', 'post_id');
     post_id.value = post.id;
     const send_button = document.createElement('input');
+
+    const gif_line = document.createElement('textarea');
+    const gif_submit = document.createElement('button');
+    gif_submit.setAttribute('type', 'submit');
+
     send_button.setAttribute('type', 'submit');
     comment_form.appendChild(post_id);
     comment_form.appendChild(comment_line);
     comment_form.appendChild(send_button);
+    comment_form.appendChild(gif_line);
+    comment_form.appendChild(gif_submit);
     comment_form.addEventListener('submit', submitComment);
     li.appendChild(comment_form);
     return li;
-};
-
-function emojiClick() {
-    var clicks = 0;
-    clicks += 1;
 };
 
 function appendPost(post) {
@@ -84,17 +84,22 @@ function appendReply(reply) {
 
     if (container) {
         container.appendChild(renderReply(reply));
-    }
+    };
 };
 
+// Creates the emoji button and counter
 function renderReaction(emoji, value) {
-    value = 0;
     const li = document.createElement('button');
     li.appendChild(document.createTextNode(emoji));
     const v = document.createElement('span');
     v.appendChild(document.createTextNode(value));
     li.append(v);
+    li.addEventListener('click', function() {
+        var count = parseInt(v.innerText);
+        v.innerHTML = (count += 1).toString();
+    });
     return li;
+    
 };
 
 function updateReactions(reactions) {
@@ -108,9 +113,9 @@ function updateReactions(reactions) {
                 container.appendChild(renderReaction(emoji, emojis[emoji]));
             } else {
                 e.querySelector('span').innerText = emojis[emoji];
-            }
-        }
-    }
+            };
+        };
+    };
 };
 
 function renderRoot(data) {
@@ -133,7 +138,7 @@ function createPost(text) {
 
 // Set character limit in textarea to 300
 function charLimit(text) {
-    var maxChars = 300;
+    var maxChars = 10;
 
     if(text.value.length > maxChars) {
         text.value = text.value.substr(0, maxChars);

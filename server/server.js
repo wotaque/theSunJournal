@@ -86,4 +86,4 @@ app.post('/:post_id/reaction/:emoji', (req, res) => {
     res.send(reactions);
 });
 
-app.listen(port, console.log(`the sun is listening at http://localhost:${port}`));
+app.listen(port, console.log(`The Sun is listening at http://localhost:${port}`));
