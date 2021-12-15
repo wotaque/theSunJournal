@@ -21,8 +21,10 @@ function renderPost(post) {
     const reactions = document.createElement('div');
     reactions.classList.add('reactions');
 
+    //Displays emojis
     reactions.appendChild(renderReaction('👍🏻', 0));
     reactions.appendChild(renderReaction('❤️', 0));
+    reactions.appendChild(renderReaction('🔥', 0));
 
     const replies = document.createElement('ol');
     li.appendChild(text);
@@ -120,10 +122,20 @@ function createPost(text) {
         .then(appendPost);
 }
 
+// Set character limit in textarea to 300
+function charLimit(text) {
+    var maxChars = 300;
+
+    if(text.value.length > maxChars) {
+        text.value = text.value.substr(0, maxChars);
+    };
+};
+
 window.addEventListener('load', function() {
     reloadPosts();
 });
 
+//Targets the entry-textbox and creates post and clears textbox after submit
 document.getElementById('entry-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const textarea = document.getElementById('entry-textbox');
