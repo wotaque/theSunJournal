@@ -1,9 +1,9 @@
 let APIKEY = "VDG6I616OCKVc1Rh9vnNX69BFhZWTHfX";
 
-document.addEventListener("DOMContentLoaded", init);
-function init() {
-    document.getElementById("btnSearch").addEventListener("click", ev => {
-        ev.preventDefault();
+document.addEventListener("DOMContentLoaded", getGiphy);
+function getGiphy() {
+    document.getElementById("btnSearch").addEventListener("click", function(event) {
+        event.preventDefault();
         let url = `https://api.giphy.com/v1/gifs/search?api_key=${APIKEY}&limit=1&q=`;
         let str = document.getElementById("search").value.trim();
         url = url.concat(str);
@@ -21,7 +21,7 @@ function init() {
                 fc.textContent = content.data[0].title;
                 fig.appendChild(img);
                 fig.appendChild(fc);
-                let out = document.querySelector('.out');
+                let out = document.querySelector('ol');
                 out.insertAdjacentElement('afterbegin', fig);
                 document.querySelector('#search').value = '';
             })
@@ -29,4 +29,4 @@ function init() {
                 console.log(err);
             });
     });
-}
+};
