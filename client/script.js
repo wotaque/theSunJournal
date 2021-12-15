@@ -2,7 +2,7 @@ const postsContainer = document.getElementById('posts');
 function endpoint(path) {
     path = path || '';
     return 'http://localhost:3000/' + path;
-}
+};
 
 function post(url, json) {
     return fetch(url, {
@@ -12,7 +12,9 @@ function post(url, json) {
             'Content-Type': 'application/json'
         },
     });
-}
+};
+
+
 
 function renderPost(post) {
     const li = document.createElement('li');
@@ -21,8 +23,10 @@ function renderPost(post) {
     const reactions = document.createElement('div');
     reactions.classList.add('reactions');
 
+    //Displays emojis
     reactions.appendChild(renderReaction('👍🏻', 0));
     reactions.appendChild(renderReaction('❤️', 0));
+    reactions.appendChild(renderReaction('🔥', 0));
 
     const replies = document.createElement('ol');
     li.appendChild(text);
@@ -43,11 +47,16 @@ function renderPost(post) {
     comment_form.addEventListener('submit', submitComment);
     li.appendChild(comment_form);
     return li;
-}
+};
+
+function emojiClick() {
+    var clicks = 0;
+    clicks += 1;
+};
 
 function appendPost(post) {
     postsContainer.appendChild(renderPost(post));
-}
+};
 
 function submitComment(event) {
     event.preventDefault();
@@ -60,14 +69,14 @@ function submitComment(event) {
     post(endpoint(post_id+'/reply'), { text: text })
         .then(response => response.json())
         .then(appendReply);
-}
+};
 
 function renderReply(reply) {
     const li = document.createElement('li');
     const text = document.createTextNode(reply.text);
     li.appendChild(text);
     return li;
-}
+};
 
 function appendReply(reply) {
     const post_id = reply.post_id;
@@ -76,21 +85,23 @@ function appendReply(reply) {
     if (container) {
         container.appendChild(renderReply(reply));
     }
-}
+};
 
 function renderReaction(emoji, value) {
-    const li = document.createElement('div');
+    value = 0;
+    const li = document.createElement('button');
     li.appendChild(document.createTextNode(emoji));
     const v = document.createElement('span');
     v.appendChild(document.createTextNode(value));
     li.append(v);
     return li;
-}
+};
 
 function updateReactions(reactions) {
     for (post_id in reactions) {
         const container = document.getElementById('post-'+post_id).getElementsByClassName('reactions')[0];
         const emojis = reactions[post_id];
+
         for (emoji in emojis) {
             const e = container.querySelector('[data-emoji="'+emoji+'"]');
             if (!e) {
@@ -100,30 +111,40 @@ function updateReactions(reactions) {
             }
         }
     }
-}
+};
 
 function renderRoot(data) {
     data.posts.forEach(appendPost);
     data.replies.forEach(appendReply);
     updateReactions(data.reactions);
-}
+};
 
 function reloadPosts() {
     fetch(endpoint())
         .then(response => response.json())
         .then(renderRoot);
-}
+};
 
 function createPost(text) {
     post(endpoint(), {text: text})
         .then(response => response.json())
         .then(appendPost);
-}
+};
+
+// Set character limit in textarea to 300
+function charLimit(text) {
+    var maxChars = 300;
+
+    if(text.value.length > maxChars) {
+        text.value = text.value.substr(0, maxChars);
+    };
+};
 
 window.addEventListener('load', function() {
     reloadPosts();
 });
 
+//Targets the entry-textbox and creates post and clears textbox after submit
 document.getElementById('entry-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const textarea = document.getElementById('entry-textbox');
