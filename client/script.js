@@ -14,8 +14,6 @@ function post(url, json) {
     });
 };
 
-
-
 function renderPost(post) {
     const li = document.createElement('li');
     li.setAttribute('id', 'post-'+post.id);
@@ -25,7 +23,7 @@ function renderPost(post) {
 
     //Displays emojis
     reactions.appendChild(renderReaction('👍🏻', 0));
-    reactions.appendChild(renderReaction('❤️', 0));
+    reactions.appendChild(renderReaction('😢', 0));
     reactions.appendChild(renderReaction('🔥', 0));
 
     const replies = document.createElement('ol');
@@ -47,11 +45,6 @@ function renderPost(post) {
     comment_form.addEventListener('submit', submitComment);
     li.appendChild(comment_form);
     return li;
-};
-
-function emojiClick() {
-    var clicks = 0;
-    clicks += 1;
 };
 
 function appendPost(post) {
@@ -84,16 +77,20 @@ function appendReply(reply) {
 
     if (container) {
         container.appendChild(renderReply(reply));
-    }
+    };
 };
 
+// Creates the emoji button and counter
 function renderReaction(emoji, value) {
-    value = 0;
     const li = document.createElement('button');
     li.appendChild(document.createTextNode(emoji));
     const v = document.createElement('span');
     v.appendChild(document.createTextNode(value));
     li.append(v);
+    li.addEventListener('click', function() {
+        var count = parseInt(v.innerText);
+        v.innerHTML = (count += 1).toString();
+    });
     return li;
 };
 
@@ -108,9 +105,9 @@ function updateReactions(reactions) {
                 container.appendChild(renderReaction(emoji, emojis[emoji]));
             } else {
                 e.querySelector('span').innerText = emojis[emoji];
-            }
-        }
-    }
+            };
+        };
+    };
 };
 
 function renderRoot(data) {
