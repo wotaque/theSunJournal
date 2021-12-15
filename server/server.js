@@ -13,6 +13,7 @@ app.use(cors());
 
 app.use(express.json());
 
+
 app.get('/', (req, res) => {
     res.send({
         posts: Object.values(posts),
