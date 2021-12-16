@@ -132,7 +132,7 @@ function createPost(text) {
 
 // Set character limit in textarea to 50
 function charLimit(text) {
-    var maxChars = 50;
+    var maxChars = 15;
 
     if(text.value.length > maxChars) {
         text.value = text.value.substr(0, maxChars);
