@@ -1,6 +1,6 @@
 const express = require('express'); 
 const app = express();
-const port = process.env.PORT || 3000; 
+const PORT = process.env.PORT || 3000; 
 
 const posts = {}
 let post_id = 0;
@@ -88,4 +88,4 @@ app.post('/:post_id/reaction/:emoji', (req, res) => {
     res.send(reactions);
 });
 
-app.listen(port, console.log(`The Sun is listening at http://localhost:${port}`));
+app.listen(PORT, console.log(`The Sun is listening at http://localhost:${PORT}`));
