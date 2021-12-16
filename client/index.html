@@ -6,38 +6,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
-    
+
+
+<!-- bootstrap 4 for annimation -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Estonia&family=M+PLUS+2:wght@100&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+
+<!-- google font for gif search -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
 </head>
 <body>
     <div class="top-bar">
-        <h1>My forum</h1>
+        <h1><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><u>Forum - Get Talking!!</u><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><br>&#128512</h1>
+        
     </div>
 
     <div class="main">
         <section class="input-section">
             <form id="entry-form">
 
-              <textarea id="entry-textbox" placeholder="Give it a message, character limit: 300" onkeydown="charLimit(this)" onkeyup="charLimit(this)"></textarea><br>
+              <textarea id="entry-textbox" placeholder="Give it a message, character limit: 15" onkeydown="charLimit(this)" onkeyup="charLimit(this)"></textarea><br>
+              <div style="text-align:center;">
+                <div class="spinner-grow text-success">
+
+
+                </div>
+                
                 <button type="submit" id="btnSubmit">Submit</button>
-
-
-            
-                <textarea id="entry-textbox" placeholder="Give it a message, character limit: 10" onkeydown="charLimit(this)" onkeyup="charLimit(this)"></textarea><br>
-
-                <button type="submit">Submit</button>
-
+                
+                <div class="spinner-grow text-success"></div>
+              </div>
+              <div style ="text-align:center;">
                 <label for="search">Search Gif: </label>
                 <input id="search" type="search" />
                 <button id="btnSearch">Go</button>
-
+                </div>
             </form>
         </section>
         <!-- id="posts styled in CSS -->
             <ul id="posts">
+                <!-- <li id="postReply"></li> -->
             </ul>
+            
     </div>
     
-    <script defer src="script.js"></script>
+    <script defer src="script.js"></script> 
     <script defer src="giphy.js"></script>
 </body>
 </html>

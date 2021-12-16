@@ -1,9 +1,12 @@
 const postsContainer = document.getElementById('posts');
+
+//localhost path endpoint
 function endpoint(path) {
     path = path || '';
     return 'http://localhost:3000/' + path;
 };
 
+//Fetch and post 
 function post(url, json) {
     return fetch(url, {
         method: 'POST',
@@ -14,7 +17,9 @@ function post(url, json) {
     });
 };
 
+
 function renderPost(post) {
+    //Creates text entries and reactions
     const li = document.createElement('li');
     li.setAttribute('id', 'post-'+post.id);
     const text = document.createTextNode(post.text);
@@ -26,6 +31,7 @@ function renderPost(post) {
     reactions.appendChild(renderReaction('😢', 0));
     reactions.appendChild(renderReaction('🔥', 0));
 
+    //Creates the replies textbox
     const replies = document.createElement('ol');
     li.appendChild(text);
     li.appendChild(reactions);
@@ -37,6 +43,8 @@ function renderPost(post) {
     post_id.setAttribute('type', 'hidden');
     post_id.setAttribute('name', 'post_id');
     post_id.value = post.id;
+
+    //Appends the posts and comments 
     const send_button = document.createElement('input');
     send_button.setAttribute('type', 'submit');
     comment_form.appendChild(post_id);
@@ -47,10 +55,12 @@ function renderPost(post) {
     return li;
 };
 
+//Calls renderPost
 function appendPost(post) {
     postsContainer.appendChild(renderPost(post));
 };
 
+//Targets the comment textarea and clears
 function submitComment(event) {
     event.preventDefault();
     const form = event.target;
@@ -64,12 +74,15 @@ function submitComment(event) {
         .then(appendReply);
 };
 
+//Renders the comments and appends to list
 function renderReply(reply) {
     const li = document.createElement('li');
     const text = document.createTextNode(reply.text);
     li.appendChild(text);
     return li;
+    
 };
+
 
 function appendReply(reply) {
     const post_id = reply.post_id;
@@ -91,8 +104,8 @@ function renderReaction(emoji, value) {
         var count = parseInt(v.innerText);
         v.innerHTML = (count += 1).toString();
     });
-    
     return li;
+    return v;
 };
 
 function updateReactions(reactions) {
@@ -111,42 +124,53 @@ function updateReactions(reactions) {
     };
 };
 
+//Renders posts and replies
 function renderRoot(data) {
     data.posts.forEach(appendPost);
     data.replies.forEach(appendReply);
     updateReactions(data.reactions);
 };
 
+//Fetches posts from server
 function reloadPosts() {
     fetch(endpoint())
         .then(response => response.json())
         .then(renderRoot);
 };
 
+//Creates the post and appends it 
 function createPost(text) {
     post(endpoint(), {text: text})
         .then(response => response.json())
         .then(appendPost);
 };
 
-// Set character limit in textarea to 300
+
+// Set character limit in textarea to 50
 function charLimit(text) {
-    var maxChars = 300;
+    var maxChars = 15;
+
 
     if(text.value.length > maxChars) {
         text.value = text.value.substr(0, maxChars);
     };
 };
 
+//When window reloads, run reloadPpost()
 window.addEventListener('load', function() {
     reloadPosts();
 });
 
 //Targets the entry-textbox and creates post and clears textbox after submit
-document.getElementById('entry-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const textarea = document.getElementById('entry-textbox');
-    const text = textarea.value;
-    textarea.value = '';
-    createPost(text);
-});
+
+var enter = document.getElementById('entry-form');
+if(enter){
+    enter.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const textarea = document.getElementById('entry-textbox');
+        const text = textarea.value;
+        textarea.value = '';
+        createPost(text);
+    });
+}
+
