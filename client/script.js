@@ -69,6 +69,7 @@ function renderReply(reply) {
     const text = document.createTextNode(reply.text);
     li.appendChild(text);
     return li;
+    
 };
 
 function appendReply(reply) {
@@ -129,9 +130,9 @@ function createPost(text) {
         .then(appendPost);
 };
 
-// Set character limit in textarea to 300
+// Set character limit in textarea to 50
 function charLimit(text) {
-    var maxChars = 300;
+    var maxChars = 50;
 
     if(text.value.length > maxChars) {
         text.value = text.value.substr(0, maxChars);
