@@ -1,0 +1,26 @@
+{
+  "name": "thesunjournal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest --env=jsdom"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandolee15/theSunJournal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brandolee15/theSunJournal/issues"
+  },
+  "homepage": "https://github.com/brandolee15/theSunJournal#readme",
+  "devDependencies": {
+    "jest": "^27.4.5"
+  }
+}
