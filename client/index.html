@@ -1,64 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
-
-
-<!-- bootstrap 4 for annimation -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<link href="https://fonts.googleapis.com/css2?family=Estonia&family=M+PLUS+2:wght@100&family=Pacifico&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-
-<!-- google font for gif search -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-</head>
-<body>
-    <div class="top-bar">
-        <h1><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><u>Forum - Get Talking!!</u><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><div class="spinner-grow text-warning"></div><br>&#128512</h1>
-        
-    </div>
-
-    <div class="main">
-        <section class="input-section">
-            <form id="entry-form">
-
-              <textarea id="entry-textbox" placeholder="Give it a message, character limit: 15" onkeydown="charLimit(this)" onkeyup="charLimit(this)"></textarea><br>
-              <div style="text-align:center;">
-                <div class="spinner-grow text-success">
-
-
-                </div>
-                
-                <button type="submit" id="btnSubmit">Submit</button>
-                
-                <div class="spinner-grow text-success"></div>
-              </div>
-              <div style ="text-align:center;">
-                <label for="search">Search Gif: </label>
-                <input id="search" type="search" />
-                <button id="btnSearch">Go</button>
-                </div>
-            </form>
-        </section>
-        <!-- id="posts styled in CSS -->
-            <ul id="posts">
-                <!-- <li id="postReply"></li> -->
-            </ul>
-            
-    </div>
+  <head>
+    <title>TheSunJournal: Front Page</title>
     
-    <script defer src="script.js"></script> 
-    <script defer src="giphy.js"></script>
-</body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">  
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" ></script>  
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" ></script>  
+     -->
+  </head>
+
+  <body>  
+
+    <!-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol> -->
+
+
+
+
+      
+      <div class="carousel-inner">
+        
+        <div class="item-active">
+          <img src="images/houses1.jpeg" alt="Houses" style="width:100%;">
+          <div class="carousel-caption">  
+            <h1 class="display-2">The Sun Journal</h1>  
+            <h3 >Live Happy, Express Yourself</h3>  
+              <a href="frontpage.html"><button type="button" class="btn btn-primary btn-lg" >Post Anonymously</button></a>
+          </div>  
+        </div>
+          
+        <div class="item">
+          <img src="images/houses2.jpeg" alt="Houses2" style="width:100%;">
+          <div class="carousel-caption">
+            <h1 class="display-2">The Sun Journal</h1>  
+            <h3 >Live Happy, Express Yourself</h3>  
+            <!-- <a href="index.html"><button type="button" class="btn btn-primary btn-lg" >Post Anonymously</button></a> -->
+          </div>  
+        </div>
+            
+        <div class="item">
+          <img src="images/houses2.jpeg" alt="Houses3" style="width:100%;">
+          <div class="carousel-caption">  
+            <h1 class="display-2">The Sun Journal</h1>  
+            <h3 >Live Happy, Express Yourself</h3>  
+            <!-- <a href="index.html"><button type="button" class="btn btn-primary btn-lg" >Post Anonymously</button></a> -->
+          </div>  
+        </div>
+
+      </div>
+
+    </div>
+
+  </body>
+
 </html>
+
