@@ -40,6 +40,46 @@ width: 98%;
 /* .input-section{} */
 
 
+/* FRONT PAGE: 1st text LINE */
+.firstLine{
+    font-family: "Google Sans",Roboto,Arial,sans-serif;
+    font-size: 70px;
+    font-weight: bolder;
+    -webkit-text-stroke: 3px darkblue; /* width and color */
+    /* margin: 1em;
+    padding: 1em; */
+}
+/* FRONT PAGE: 2nd text LINE */
+.secondLine{
+    font-family: "Google Sans",Roboto,Arial,sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    -webkit-text-stroke: 1px darkblue; /* width and color */
+    /* margin: 1em;
+    padding: 1em; */
+}
+/* FRONT PAGE: BUTTON */
+.btnFrontPage{
+    cursor: pointer;
+    /* !!! YES: button style*/
+    background-color: rgb(21, 48, 170);
+    height: 48px;
+    border-radius: 24px;
+    border-style: none;
+    box-shadow:
+    rgba(209, 212, 20, 0.2) 0 3px 5px -1px,
+    rgba(153, 12, 12, 0.14) 0 6px 10px 0,
+    rgba(18, 33, 173, 0.12) 0 1px 18px 0;
+    /* !!! YES: text */
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "Google Sans",Roboto,Arial,sans-serif;
+    padding: 2px 24px; 
+}
+
+
+
 /* title */
 h1{
     font-family: 'Estonia', cursive;
