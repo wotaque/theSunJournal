@@ -25,7 +25,7 @@ app.post('/', function(req, res) {
     const text = req.body.text;
     if (!text) {
         throw "Empty `text`";
-    }
+    } 
     post_id++;
     const post = {
         text: text,
