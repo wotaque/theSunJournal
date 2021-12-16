@@ -91,6 +91,7 @@ function renderReaction(emoji, value) {
         var count = parseInt(v.innerText);
         v.innerHTML = (count += 1).toString();
     });
+    
     return li;
 };
 
