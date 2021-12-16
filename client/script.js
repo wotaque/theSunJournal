@@ -80,6 +80,7 @@ function renderReply(reply) {
     const text = document.createTextNode(reply.text);
     li.appendChild(text);
     return li;
+    
 };
 
 
@@ -144,9 +145,11 @@ function createPost(text) {
         .then(appendPost);
 };
 
-// Set character limit in textarea to 300 (demo 5 for now)
+
+// Set character limit in textarea to 50
 function charLimit(text) {
-    var maxChars = 5;
+    var maxChars = 15;
+
 
     if(text.value.length > maxChars) {
         text.value = text.value.substr(0, maxChars);
@@ -159,6 +162,7 @@ window.addEventListener('load', function() {
 });
 
 //Targets the entry-textbox and creates post and clears textbox after submit
+
 var enter = document.getElementById('entry-form');
 if(enter){
     enter.addEventListener('submit', function(event) {
@@ -169,3 +173,4 @@ if(enter){
         createPost(text);
     });
 }
+

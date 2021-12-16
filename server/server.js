@@ -38,6 +38,7 @@ app.post('/', function(req, res) {
 app.post('/:post_id/reply', (req, res) => {
     const reply_data = req.body;
     const post_id = req.params.post_id;
+    
 
     if (!post_id) {
         throw "No `post_id`";
@@ -55,6 +56,7 @@ app.post('/:post_id/reply', (req, res) => {
     };
     replies.push(reply);
     res.send(reply);
+    
 });
 
 app.post('/:post_id/reaction/:emoji', (req, res) => {
