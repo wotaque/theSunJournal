@@ -9,9 +9,7 @@
   "scripts": {
     "start": "node server.js",
     "start-dev": "nodemon server.js"
-},
-
- 
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brandolee15/theSunJournal.git"
@@ -24,6 +22,10 @@
   },
   "homepage": "https://github.com/brandolee15/theSunJournal#readme",
   "devDependencies": {
+    "cors": "^2.8.5",
     "jest": "^27.4.5"
+  },
+  "dependencies": {
+    "express": "^4.17.2"
   }
 }
